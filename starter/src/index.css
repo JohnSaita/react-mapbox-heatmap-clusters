@@ -1,0 +1,61 @@
+:root {
+  --navy: #0b2e5c;
+  --blue: #2a7ad5;
+  --orange: #ee6a35;
+  --ink: #12233d;
+  --muted: #5d6b80;
+  --line: #e3e8ef;
+  --card: #ffffff;
+  font-family: Inter, 'Segoe UI', system-ui, sans-serif;
+  color: var(--ink);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { background: #111; }
+
+.layout { position: relative; height: 100%; }
+.map { position: absolute; inset: 0; }
+.message { margin: 0; padding: 24px; font-size: 15px; color: #fff; }
+
+/* The view control */
+.panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 320px;
+  max-height: calc(100% - 40px);
+  overflow: auto;
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+.panel header { background: var(--navy); color: #fff; padding: 16px 20px 14px; }
+.panel .eyebrow { margin: 0 0 3px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8c4d6; }
+.panel h1 { margin: 0; font-size: 22px; font-weight: 700; }
+
+.count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 8px; padding: 14px 20px 12px; border-bottom: 1px solid var(--line); }
+.count output { font-size: 30px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+.count span { font-size: 14px; color: var(--muted); }
+
+.modes { display: flex; gap: 6px; margin: 14px 20px 0; padding: 4px; background: #eef1f5; border-radius: 10px; }
+.mode { flex: 1; position: relative; padding: 8px 0; border-radius: 7px; text-align: center; font-size: 15px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.mode input { position: absolute; opacity: 0; width: 0; height: 0; }
+.mode:has(input:checked) { background: var(--card); color: var(--navy); box-shadow: 0 1px 4px rgba(11, 46, 92, 0.18); }
+.mode:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 1px; }
+
+.help { margin: 10px 20px 0; font-size: 14px; line-height: 1.45; }
+.source { margin: 12px 20px 16px; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+
+.popup p { margin: 2px 0; font: 13px/1.45 Inter, 'Segoe UI', system-ui, sans-serif; color: var(--ink); }
+.popup b { display: inline-block; width: 62px; color: var(--muted); font-weight: 600; }
+
+/* Phones: the control becomes a sheet along the bottom */
+@media (max-width: 600px) {
+  .panel { top: auto; bottom: 30px; left: 8px; right: 8px; width: auto; max-height: 52%; }
+  .panel header { padding: 10px 16px; }
+  .panel h1 { font-size: 17px; }
+  .count { padding: 8px 16px; }
+  .help { display: none; }
+}
